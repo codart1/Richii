@@ -1,0 +1,26 @@
+{
+  "name": "richii",
+  "version": "0.0.35",
+  "description": "Live demo",
+  "keywords": [],
+  "homepage": "https://codesandbox.io/s/4j7m47vlm4",
+  "main": "index.js",
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "firebase": "5.3.0",
+    "prop-types": "15.6.2",
+    "react": "latest",
+    "react-dom": "latest",
+    "typeface-roboto": "0.0.54"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
