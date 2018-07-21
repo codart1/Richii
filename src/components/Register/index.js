@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Button from "@material-ui/core/Button";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
+import TextField from '@material-ui/core/TextField'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import Button from '@material-ui/core/Button'
 
 const styles = theme => ({
   root: {
@@ -16,29 +16,29 @@ const styles = theme => ({
   },
 
   margin: {
-    margin: "1.5rem 0",
-    display: "block"
+    margin: '1.5rem 0',
+    display: 'block'
   }
-});
+})
 
 function PaperSheet(props) {
-  const { classes, onRegister, message } = props;
+  const { classes, onRegister, message } = props
 
-  let values = {};
+  let values = {}
 
   const onChange = e => {
-    values[e.target.name] = e.target.value;
-  };
+    values[e.target.name] = e.target.value
+  }
 
   const clickRegister = () => {
-    onRegister(values);
-  };
+    onRegister(values)
+  }
 
   const commonProps = {
     fullWidth: true,
     className: classes.margin,
     onChange
-  };
+  }
 
   // const fields = [
   //   {
@@ -142,18 +142,18 @@ function PaperSheet(props) {
         </div>
       </Paper>
     </div>
-  );
+  )
 }
 
 PaperSheet.defaultProps = {
   onChange: () => {},
   message: null
-};
+}
 
 PaperSheet.propTypes = {
   classes: PropTypes.object.isRequired,
   onChange: PropTypes.func,
   message: PropTypes.oneOf([PropTypes.string, PropTypes.element])
-};
+}
 
-export default withStyles(styles)(PaperSheet);
+export default withStyles(styles)(PaperSheet)

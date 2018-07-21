@@ -1,34 +1,34 @@
-import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
+import React from 'react'
+import { withStyles } from '@material-ui/core/styles'
+import PropTypes from 'prop-types'
 
 const commonStyles = {
-  margin: "0 auto",
-  padding: "0 1rem"
-};
+  margin: '0 auto',
+  padding: '0 1rem'
+}
 
 const styles = {
   normal: {
     ...commonStyles,
-    maxWidth: "1024px"
+    maxWidth: '1024px'
   },
 
   small: {
     ...commonStyles,
-    maxWidth: "720px"
+    maxWidth: '720px'
   }
-};
+}
 
 function Container({ classes, children, size, className }) {
-  return <div className={classes[size] + " " + className}>{children}</div>;
+  return <div className={classes[size] + ' ' + className}>{children}</div>
 }
 
 Container.defaultProps = {
-  size: "normal"
-};
+  size: 'normal'
+}
 
 Container.propsType = {
   size: PropTypes.string
-};
+}
 
-export default withStyles(styles)(Container);
+export default withStyles(styles)(Container)
