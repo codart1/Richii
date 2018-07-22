@@ -7,7 +7,6 @@ import TextField from '@material-ui/core/TextField'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Button from '@material-ui/core/Button'
-import $ from 'jquery'
 import { CircularProgress } from '@material-ui/core'
 
 const styles = theme => ({
@@ -29,45 +28,130 @@ const styles = theme => ({
   disable: {
     opacity: '.3',
     pointerEvents: 'none'
+  },
+
+  error: {
+    backgroundColor: 'red',
+    '&:before': {
+      content: '""',
+      position: 'absolute',
+      left: 0
+    }
   }
 })
 
 class Register extends React.Component {
-  formRef = React.createRef()
-
-  clickRegister = () => {
-    const value = {}
-    $(this.formRef.current)
-      .find('input')
-      .each(function() {
-        const $this = $(this)
-        const name = $this.prop('name')
-
-        if (!name) return
-
-        value[name] = $this.val()
-        // console.log($this.prop('name'))
-      })
-
-    // console.log(value)
-    this.props.onRegister(value)
-  }
-
   render() {
-    const { classes, message, complete } = this.props
+    const {
+      values,
+      touched,
+      errors,
+      dirty,
+      isSubmitting,
+      handleChange,
+      handleBlur,
+      handleSubmit,
+      handleReset,
+      classes,
+      message
+    } = this.props
 
-    const commonProps = {
-      fullWidth: true,
-      className: classes.margin
+    const commonProps = name => {
+      let normals = {
+        fullWidth: true,
+        className: classes.margin,
+        onChange: handleChange,
+        onBlur: handleBlur
+      }
+
+      if (name) {
+        return {
+          ...normals,
+          value: values[name],
+          helperText: errors[name] && touched[name] ? errors[name] : null,
+          error: errors[name] && touched[name],
+          name
+        }
+      }
+
+      return normals
     }
 
-    // const fields = [
-    //   {
-    //     ...commonProps,
-    //     label: "Tên(props)đăng nhập",
-    //     id: "userna(props)e",
-    //   }
-    // ]
+    const fields = (
+      <div className={isSubmitting ? classes.disable : ''}>
+        <TextField
+          {...commonProps('email')}
+          label="Email *"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AccountCircle />
+              </InputAdornment>
+            )
+          }}
+        />
+        <TextField
+          {...commonProps('password')}
+          type="password"
+          label="Mật khẩu *"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AccountCircle />
+              </InputAdornment>
+            )
+          }}
+        />
+        {/* <TextField
+          {...commonProps()}
+          label="Tên đăng nhập"
+          name="username"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AccountCircle />
+              </InputAdornment>
+            )
+          }}
+        /> */}
+        <TextField
+          {...commonProps('fullName')}
+          label="Họ và tên"
+          name="fullName"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AccountCircle />
+              </InputAdornment>
+            )
+          }}
+        />
+        <TextField
+          {...commonProps('idCardNumber')}
+          label="Số CMND"
+          name="idCardNumber"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AccountCircle />
+              </InputAdornment>
+            )
+          }}
+        />
+        <TextField
+          {...commonProps('phoneNumber')}
+          label="Số di động"
+          name="phoneNumber"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AccountCircle />
+              </InputAdornment>
+            )
+          }}
+        />
+      </div>
+    )
 
     return (
       <div ref={this.formRef}>
@@ -75,94 +159,19 @@ class Register extends React.Component {
           <Typography variant="headline" component="h3">
             Đăng kí thành viên Richii
           </Typography>
-          <div className={!complete ? classes.disable : ''}>
-            <TextField
-              {...commonProps}
-              label="Tên đăng nhập"
-              name="username"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountCircle />
-                  </InputAdornment>
-                )
-              }}
-            />
-            <TextField
-              {...commonProps}
-              label="Họ và tên"
-              name="fullName"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountCircle />
-                  </InputAdornment>
-                )
-              }}
-            />
-            <TextField
-              fullWidth
-              className={classes.margin}
-              label="Số CMND"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountCircle />
-                  </InputAdornment>
-                )
-              }}
-            />
-            <TextField
-              fullWidth
-              className={classes.margin}
-              label="Số di động"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountCircle />
-                  </InputAdornment>
-                )
-              }}
-            />
-            <TextField
-              {...commonProps}
-              label="Email"
-              name="email"
-              type="email"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountCircle />
-                  </InputAdornment>
-                )
-              }}
-            />
-            <TextField
-              {...commonProps}
-              label="Mật khẩu"
-              name="password"
-              type="password"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountCircle />
-                  </InputAdornment>
-                )
-              }}
-            />
-          </div>
+          {fields}
           {message && <div className={classes.margin}>{message}</div>}
           <div>
             <Button
-              onClick={this.clickRegister}
+              onClick={handleSubmit}
               variant="contained"
               size="large"
               color="primary"
               className={classes.button}
-              disabled={!complete}
+              disabled={isSubmitting}
             >
               <div>
-                {complete || (
+                {isSubmitting && (
                   <CircularProgress
                     className={classes.progress}
                     variant="indeterminate"
@@ -181,15 +190,13 @@ class Register extends React.Component {
 
   static defaultProps = {
     onChange: () => {},
-    message: null,
-    complete: true
+    message: null
   }
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
     onChange: PropTypes.func,
-    message: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-    complete: PropTypes.bool
+    message: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
   }
 }
 
