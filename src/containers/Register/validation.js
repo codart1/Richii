@@ -13,12 +13,12 @@ const ValidationForm = withFormik({
   validationSchema: yup.object().shape({
     email: yup
       .string()
-      .email('Invalid email address')
-      .required('Email is required!'),
+      .email('Email không hợp lệ')
+      .required('Email không được để trống'),
     password: yup
       .string()
-      .required('password khong duoc de trong')
-      .min(6, 'password phai co it nhat ${min} ki tu') // eslint-disable-line no-template-curly-in-string
+      .required('Password không được để trống')
+      .min(6, 'Password phải có ít nhất ${min} kí tự') // eslint-disable-line no-template-curly-in-string
   }),
   handleSubmit: async (
     values,

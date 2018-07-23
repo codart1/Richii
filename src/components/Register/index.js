@@ -4,10 +4,10 @@ import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
-import AccountCircle from '@material-ui/icons/AccountCircle'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Button from '@material-ui/core/Button'
 import { CircularProgress } from '@material-ui/core'
+import Icon from '@material-ui/core/Icon'
 
 const styles = theme => ({
   root: {
@@ -28,15 +28,6 @@ const styles = theme => ({
   disable: {
     opacity: '.3',
     pointerEvents: 'none'
-  },
-
-  error: {
-    backgroundColor: 'red',
-    '&:before': {
-      content: '""',
-      position: 'absolute',
-      left: 0
-    }
   }
 })
 
@@ -85,7 +76,7 @@ class Register extends React.Component {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <AccountCircle />
+                <Icon className={classes.icon}>email</Icon>
               </InputAdornment>
             )
           }}
@@ -97,7 +88,7 @@ class Register extends React.Component {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <AccountCircle />
+                <Icon className={classes.icon}>fingerprint</Icon>
               </InputAdornment>
             )
           }}
@@ -121,7 +112,7 @@ class Register extends React.Component {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <AccountCircle />
+                <Icon className={classes.icon}>face</Icon>
               </InputAdornment>
             )
           }}
@@ -133,7 +124,7 @@ class Register extends React.Component {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <AccountCircle />
+                <Icon className={classes.icon}>chrome_reader_mode</Icon>
               </InputAdornment>
             )
           }}
@@ -145,7 +136,7 @@ class Register extends React.Component {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <AccountCircle />
+                <Icon className={classes.icon}>phone</Icon>
               </InputAdornment>
             )
           }}

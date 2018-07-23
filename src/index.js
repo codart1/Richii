@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from './shared/Container'
 import { withStyles } from '@material-ui/core/styles'
+import { Helmet } from 'react-helmet'
 import 'typeface-roboto'
 
 import Register from './containers/Register'
@@ -28,6 +29,14 @@ const styles = {
 function App({ classes }) {
   return (
     <React.Fragment>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Richii group</title>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        />
+      </Helmet>
       <CssBaseline />
       <div className={`${classes.background} ${classes.all}`}>
         <Container size="small" className={classes.margin}>
